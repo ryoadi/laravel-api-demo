@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Requests\CreateEmploymentRequest;
+use App\Http\Requests\User\Employment\CreateEmploymentRequest;
 use Illuminate\Support\Facades\Validator;
 
 it('validate form', function () {

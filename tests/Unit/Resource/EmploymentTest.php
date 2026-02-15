@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Resources\EmploymentResource;
+use App\Http\Resources\User\EmploymentResource;
 use Illuminate\Http\Request;
 use App\Models\Employment;
+
+describe('employment resource', function () {
+
 
 it('return specified data', function () {
     $job = Employment::factory()->make(['id' => 1]);
@@ -19,4 +22,5 @@ it('return specified data', function () {
         'created_at', 
         'updated_at',
     ]]);
+});
 });
