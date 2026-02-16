@@ -1,6 +1,5 @@
 <?php
 
-use App\Models\Employment;
 use App\Models\User;
 
 use function Pest\Laravel\actingAs;
@@ -10,10 +9,10 @@ it('delete user', function () {
     $user = User::factory()->create();
     $id = $user->id;
 
-    $response = actingAs($user)->deleteJson('/user');
+    $response = actingAs($user)->deleteJson('/api/user');
 
     $response->assertSuccessful();
-    assertDatabaseMissing(Employment::getTable(), [
+    assertDatabaseMissing('users', [
         'id' => $id,
     ]);
 });

@@ -8,13 +8,14 @@ use function Pest\Laravel\assertDatabaseMissing;
 
 it('delete employment', function () {
     $user = User::factory()->create();
-    $employment = Employment::factory()->create();
-    $id = $employment->id;
+    $employment = Employment::factory()
+        ->for($user, 'created_by')
+        ->create();
 
-    $response = actingAs($user)->deleteJson("/user/job/{$id}");
+    $response = actingAs($user)->deleteJson("/api/user/jobs/{$employment->id}");
 
     $response->assertSuccessful();
-    assertDatabaseMissing(Employment::getTable(), [
-        'id' => $id,
+    assertDatabaseMissing('employments', [
+        'id' => $employment->id,
     ]);
 });

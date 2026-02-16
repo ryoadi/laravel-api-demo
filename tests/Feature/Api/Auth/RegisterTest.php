@@ -1,7 +1,14 @@
 <?php
 
-test('example', function () {
-    $response = $this->get('/');
+use function Pest\Laravel\postJson;
 
-    $response->assertStatus(200);
+it('create a user', function () {
+    $response = postJson('/api/auth/register', [
+        'name' => 'user name',
+        'email' => 'test@email.com',
+        'password' => 'password',
+        'password_confirmation' => 'password',
+    ]);
+
+    $response->assertSuccessful();
 });

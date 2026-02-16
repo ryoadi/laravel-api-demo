@@ -8,15 +8,15 @@ use function Pest\Laravel\assertDatabaseHas;
 
 it('update employment', function () {
     $user = User::factory()->create();
-    $employment = Employment::factory()->create();
+    $employment = Employment::factory()->create(['created_by_id' => $user->id]);
 
-    $response = actingAs($user)->patchJson("/user/job/{$employment->id}", [
+    $response = actingAs($user)->patchJson("/api/user/jobs/{$employment->id}", [
         'title' => 'test title',
         'description' => 'test description',
     ]);
 
     $response->assertSuccessful();
-    assertDatabaseHas(Employment::getTable(), [
+    assertDatabaseHas('employments', [
         'id' => $employment->id,
         'title' => 'test title',
         'description' => 'test description',

@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Enums\EmploymentStatusEnum;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,7 +21,8 @@ class EmploymentFactory extends Factory
         return [
             'title' => $this->faker->jobTitle(),
             'description' => $this->faker->paragraph(),
-            'status' => $this->faker->randomElement(['draft', 'published', 'archived']),
+            'status' => $this->faker->randomElement(EmploymentStatusEnum::cases())->value,
+            'created_by_id' => User::factory(),
         ];
     }
 }
