@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('status')->default('draft');
             $table->foreignId('created_by_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
+            $table->timestamp('published_at')->nullable();
         });
     }
 

@@ -14,7 +14,13 @@ class Employment extends Model
     /** @use HasFactory<\Database\Factories\EmploymentFactory> */
     use HasFactory;
 
-    protected $fillable = ['title', 'description', 'status', 'created_by_id'];
+    protected $fillable = [
+        'title', 
+        'description', 
+        'status', 
+        'created_by_id', 
+        'published_at'
+    ];
 
     public function created_by(): BelongsTo
     {
@@ -25,6 +31,7 @@ class Employment extends Model
     {
         return [
             'status' => EmploymentStatusEnum::class,
+            'published_at' => 'datetime',
         ];
     }
 
