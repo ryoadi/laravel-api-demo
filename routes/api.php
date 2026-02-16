@@ -17,7 +17,7 @@ Route::group([], function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::get('/user', fn (Request $request) => $request->user()->toResource());
+    Route::get('/user', [UserController::class, 'show']);
     Route::patch('/user', [UserController::class, 'update']);
     Route::delete('/user', [UserController::class, 'destroy']);
 

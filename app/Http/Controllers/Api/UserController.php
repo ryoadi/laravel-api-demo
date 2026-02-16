@@ -12,6 +12,14 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     /**
+     * Display the authenticated user's profile.
+     */
+    public function show(Request $request): Responsable
+    {
+        return $request->user()->toResource();
+    }
+
+    /**
      * Update the specified resource in storage.
      */
     public function update(UpdateUserRequest $request): Responsable
