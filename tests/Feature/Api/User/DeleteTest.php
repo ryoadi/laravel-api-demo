@@ -15,5 +15,5 @@ it('delete user', function () {
     $response->assertSuccessful();
     assertDatabaseMissing(Employment::getTable(), [
         'id' => $id,
-    ])
+    ]);
 });

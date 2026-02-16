@@ -15,6 +15,6 @@ it('delete employment', function () {
 
     $response->assertSuccessful();
     assertDatabaseMissing(Employment::getTable(), [
-        'id' => $id
-    ])
+        'id' => $id,
+    ]);
 });

@@ -2,18 +2,12 @@
 
 namespace App\Http\Requests\User\Employment;
 
+use App\Enums\EmploymentStatusEnum;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class QueryEmploymentRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
@@ -22,7 +16,8 @@ class QueryEmploymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'keyword' => 'filled|string',
+            'status' => ['filled', Rule::enum(EmploymentStatusEnum::class)],
         ];
     }
 }

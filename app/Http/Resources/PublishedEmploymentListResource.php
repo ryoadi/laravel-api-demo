@@ -14,6 +14,21 @@ class PublishedEmploymentListResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return [
+            'title' => $this->title,
+            'created_by' => $this->getCreatorName(),
+            'created_at' => $this->created_at,
+            'updated_at' => $this->updated_at,
+            'link' => url("/api/employments/{$this->id}"),
+        ];
+    }
+
+    private function getCreatorName(): string
+    {
+        if ($this->relationLoaded('creator') && $this->creator) {
+            return $this->creator->name;
+        }
+
+        return 'Unknown';
     }
 }

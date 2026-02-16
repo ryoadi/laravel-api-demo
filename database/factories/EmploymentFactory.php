@@ -17,7 +17,9 @@ class EmploymentFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'title' => $this->faker->jobTitle(),
+            'description' => $this->faker->paragraph(),
+            'status' => $this->faker->randomElement(['draft', 'published', 'archived']),
         ];
     }
 }

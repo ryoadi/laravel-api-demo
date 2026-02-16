@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('employments', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
+            $table->text('description')->nullable();
+            $table->string('status')->default('draft');
+            $table->foreignId('created_by_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

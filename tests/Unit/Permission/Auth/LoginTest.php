@@ -3,16 +3,20 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 
-it('allow anonymous', function () {
-    $result = Gate::allows('login', User::class);
+describe('login', function () {
 
-    expect($result)->toBeTrue();
-});
+    it('allow anonymous', function () {
+        $result = Gate::allows('login', User::class);
 
-it('deny logged in user', function () {
-    $user = User::factory()->make();
+        expect($result)->toBeTrue();
+    });
 
-    $result = Gate::forUser($user)->denies('login', User::class);
+    it('deny logged in user', function () {
+        $user = User::factory()->make();
 
-    expect($result)->toBeTrue();
+        $result = Gate::forUser($user)->denies('login', User::class);
+
+        expect($result)->toBeTrue();
+    });
+
 });
