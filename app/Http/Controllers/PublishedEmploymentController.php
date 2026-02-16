@@ -18,14 +18,9 @@ class PublishedEmploymentController extends Controller
      */
     public function index(QueryPublishedEmploymentRequest $request): Responsable
     {
-        $query = Employment::where('status', 1); // 1 = PUBLISHED
-
-        if ($request->has('keyword')) {
-            $query->where('title', 'like', '%'.$request->keyword.'%')
-                ->orWhere('description', 'like', '%'.$request->keyword.'%');
-        }
-
-        $employments = $query->get();
+        $employments = Employment::published()
+            ->forIndex(...$request->validated())
+            ->paginate();
 
         return PublishedEmploymentListResource::collection($employments);
     }

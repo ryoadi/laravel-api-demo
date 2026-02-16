@@ -20,22 +20,11 @@ class EmploymentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request, QueryEmploymentRequest $queryRequest): Responsable
+    public function index(QueryEmploymentRequest $request): Responsable
     {
-        $userId = $request->user()->id;
-
-        $query = Employment::where('created_by_id', $userId);
-
-        if ($queryRequest->has('keyword')) {
-            $query->where('title', 'like', '%'.$queryRequest->keyword.'%')
-                ->orWhere('description', 'like', '%'.$queryRequest->keyword.'%');
-        }
-
-        if ($queryRequest->has('status')) {
-            $query->where('status', $queryRequest->status->value);
-        }
-
-        $employments = $query->get();
+        $employments = $request->user()->employments()
+            ->forIndex(...$request->validated())
+            ->paginate();
 
         return EmploymentListResource::collection($employments);
     }

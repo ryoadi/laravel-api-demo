@@ -52,6 +52,8 @@ class User extends Authenticatable
 
     /**
      * Get all the employment posts created by the user.
+     * 
+     * @return HasMany<Employment>
      */
     public function employments(): HasMany
     {
