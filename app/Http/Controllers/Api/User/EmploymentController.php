@@ -50,9 +50,9 @@ class EmploymentController extends Controller
      */
     public function show(Request $request, Employment $employment): Responsable
     {
-        throw_unless(
+        abort_unless(
             $employment->created_by_id === $request->user()->id,
-            NotFoundHttpException::class,
+            404,
         );
 
         return EmploymentResource::make($employment);
@@ -63,9 +63,9 @@ class EmploymentController extends Controller
      */
     public function update(Employment $employment, UpdateEmploymentRequest $request): Responsable
     {
-        throw_unless(
+        abort_unless(
             $employment->created_by_id === $request->user()->id,
-            NotFoundHttpException::class,
+            404,
         );
 
         $employment->update($request->validated());
@@ -75,9 +75,9 @@ class EmploymentController extends Controller
 
     public function published(Request $request, Employment $employment): Responsable
     {
-        throw_if(
+        abort_if(
             $employment->status === EmploymentStatusEnum::PUBLISHED,
-            DomainException::class,
+            422,
         );
 
         $employment->update([
@@ -93,9 +93,9 @@ class EmploymentController extends Controller
      */
     public function destroy(Request $request, Employment $employment): Responsable
     {
-        throw_unless(
+        abort_unless(
             $employment->created_by_id === $request->user()->id,
-            NotFoundHttpException::class,
+            404,
         );
 
         $employment->delete();

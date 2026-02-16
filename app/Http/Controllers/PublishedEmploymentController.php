@@ -30,9 +30,9 @@ class PublishedEmploymentController extends Controller
      */
     public function show(Employment $employment): Responsable
     {
-        throw_unless(
+        abort_unless(
             $employment->status === EmploymentStatusEnum::PUBLISHED,
-            NotFoundHttpException::class,
+            404,
         );
 
         return PublishedEmploymentResource::make($employment);

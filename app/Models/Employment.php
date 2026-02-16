@@ -46,6 +46,7 @@ class Employment extends Model
     {
         $query
             ->when($status)->where('status', EmploymentStatusEnum::PUBLISHED)
-            ->when($keyword)->where('title', 'LIKE', "%{$keyword}%");
+            ->when($keyword)->where('title', 'LIKE', "%{$keyword}%")
+            ->when($keyword)->where('description', 'LIKE', "%{$keyword}%");
     }
 }

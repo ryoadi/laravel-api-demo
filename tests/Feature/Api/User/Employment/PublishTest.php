@@ -31,5 +31,5 @@ it('cannot publish already published employment', function () {
 
     $response = actingAs($user)->putJson("/api/user/jobs/{$employment->id}/published", []);
 
-    $response->assertServerError();
+    $response->assertUnprocessable();
 });
