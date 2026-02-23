@@ -24,3 +24,6 @@ Homestead.yaml
 Thumbs.db
 boost.json
 .github/copilot-instructions.md
+**/caddy
+frankenphp
+frankenphp-worker.php
