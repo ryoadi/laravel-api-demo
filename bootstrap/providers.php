@@ -8,6 +8,5 @@ $telescope = env('APP_ENV') === 'local' ?
 
 return [
     App\Providers\AppServiceProvider::class,
-    App\Providers\TelescopeServiceProvider::class,
     ...$telescope,
 ];
