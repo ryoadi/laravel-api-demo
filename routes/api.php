@@ -1,19 +1,20 @@
 <?php
 
-use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\Auth\RegisterController;
 use App\Http\Controllers\Api\User\EmploymentController;
+use App\Http\Controllers\Api\User\PublishEmploymentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\PublishedEmploymentController;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/jobs', [PublishedEmploymentController::class, 'index']);
 Route::get('/jobs/{employment}', [PublishedEmploymentController::class, 'show']);
 
 Route::group([], function () {
-    Route::post('/auth/register', [AuthController::class, 'register']);
-    Route::post('/auth/login', [AuthController::class, 'login']);
+    Route::post('/auth/register', RegisterController::class);
+    Route::post('/auth/login', LoginController::class);
 });
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -26,6 +27,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/user/jobs', [EmploymentController::class, 'store']);
     Route::get('/user/jobs/{employment}', [EmploymentController::class, 'show']);
     Route::patch('/user/jobs/{employment}', [EmploymentController::class, 'update']);
-    Route::put('/user/jobs/{employment}/published', [EmploymentController::class, 'published']);
+    Route::put('/user/jobs/{employment}/published', PublishEmploymentController::class);
     Route::delete('/user/jobs/{employment}', [EmploymentController::class, 'destroy']);
 });

@@ -6,7 +6,7 @@ use App\Enums\EmploymentStatusEnum;
 use App\Models\Employment;
 use Illuminate\Console\Command;
 
-class ArchivePublishedEmployments extends Command
+class ArchivePublishedEmploymentsCommand extends Command
 {
     /**
      * The name and signature of the console command.

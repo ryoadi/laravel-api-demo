@@ -10,11 +10,8 @@ use App\Http\Requests\User\Employment\UpdateEmploymentRequest;
 use App\Http\Resources\User\EmploymentListResource;
 use App\Http\Resources\User\EmploymentResource;
 use App\Models\Employment;
-use DomainException;
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Http\Request;
-use Illuminate\Support\Carbon;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class EmploymentController extends Controller
 {
@@ -69,21 +66,6 @@ class EmploymentController extends Controller
         );
 
         $employment->update($request->validated());
-
-        return EmploymentResource::make($employment);
-    }
-
-    public function published(Request $request, Employment $employment): Responsable
-    {
-        abort_if(
-            $employment->status === EmploymentStatusEnum::PUBLISHED,
-            422,
-        );
-
-        $employment->update([
-            'status' => EmploymentStatusEnum::PUBLISHED,
-            'published_at' => Carbon::now(),
-        ]);
 
         return EmploymentResource::make($employment);
     }

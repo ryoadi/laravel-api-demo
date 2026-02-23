@@ -1,34 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
-use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Hash;
 
-class AuthController extends Controller
+class LoginController extends Controller
 {
-    public function register(RegisterRequest $request): JsonResponse
-    {
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password,
-        ]);
-
-        $token = $user->createToken('api-token')->plainTextToken;
-
-        return response()->json([
-            'message' => 'User registered successfully.',
-            'token' => $token,
-            'user' => $user,
-        ], 201);
-    }
-
-    public function login(LoginRequest $request): JsonResponse
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(LoginRequest $request): JsonResponse
     {
         $user = User::where('email', $request->email)->first();
 
