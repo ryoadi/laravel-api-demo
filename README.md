@@ -2,7 +2,7 @@
 
 This repository contains a demonstration REST API built with Laravel. It simulates a job-search platform, but its true purpose is to showcase my approach to modern, maintainable, and production-ready backend development.
 
-## Skills Demonstrated
+## Tools & Best Practices
 Here is a breakdown of the specific technologies and practices applied in this project:
 
 Category | Technologies / Practices |	Purpose
@@ -61,10 +61,7 @@ php artisan key:generate
 # 4. Run migrations
 php artisan migrate
 
-# 5. (Optional) Seed the database
-php artisan db:seed
-
-# 6. Start the server
+# 5. Start the server
 php artisan serve
 ```
 
