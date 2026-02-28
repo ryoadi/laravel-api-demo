@@ -1,6 +1,6 @@
 <?php
 
-$telescope = env('APP_ENV') === 'local' ?
+$telescope = app()->isLocal() ?
     [
         \Laravel\Telescope\TelescopeServiceProvider::class,
         \App\Providers\TelescopeServiceProvider::class,
