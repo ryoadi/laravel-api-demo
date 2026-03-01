@@ -52,20 +52,29 @@ git clone https://github.com/ryoadi/laravel-api-demo.git
 cd laravel-api-demo
 
 # 2. Install dependencies
-composer install
+composer setup
 
-# 3. Set up environment
-cp .env.example .env
-php artisan key:generate
-
-# 4. Run migrations
-php artisan migrate
-
-# 5. Start the server
-php artisan serve
+# 3. Start the server
+composer dev
 ```
 
 The API will be available at http://localhost:8000/api. You can explore the interactive API documentation at http://localhost:8000/docs/api.
+
+## Docker
+
+This repository includes a Docker setup intended for **production-like previews**. The containerized environment uses FrankenPHP for serving the application and includes Redis for caching and session storage, mirroring the production stack. By leveraging Docker you can quickly spin up a realistic environment without installing all dependencies locally.
+
+### Installation
+
+```bash
+# 1. Build and start containers
+docker-compose up --build -d
+
+# 2. Run migrations and seeders inside the app container
+docker compose exec app php artisan migrate --seed --force
+```
+
+The API will then be accessible at `http://localhost:8000/api` and the interactive docs at `http://localhost:8000/docs/api`.
 
 ## License
 This project is open-sourced under the MIT license.
