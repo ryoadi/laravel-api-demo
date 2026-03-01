@@ -9,6 +9,12 @@ services:
     depends_on:
       - db
       - redis
+  scheduler:
+    image: laravel-api-demo-app
+    entrypoint: ['php', 'artisan', 'schedule:work']
+    depends_on:
+      - db
+      - redis
   db:
     image: postgres:alpine
     restart: always
